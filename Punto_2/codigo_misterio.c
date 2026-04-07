@@ -1,32 +1,39 @@
 #include <stdio.h>
 
-void f_alpha(int *p) {
+void invertir(int *p) {
     int temp = *p;
+    int sign = (temp < 0) ? -1 : 1;
+    int mag = temp * sign;
     int rev = 0;
-    while (temp > 0) {
-        rev = (rev * 10) + (temp % 10);
-        temp = temp / 10;
+
+    while (mag > 0) {
+        rev = (rev * 10) + (mag % 10);
+        mag = mag / 10;
     }
-    *p = rev;
+
+    *p = rev * sign;
 }
 
-void f_beta(int *p) {
+void mitad_valor(int *p) {
     *p = *p / 2;
 }
 
 void f_gamma(int *p) {
     int temp = *p;
+    int mag = (temp < 0) ? -temp : temp;
     int suma = 0;
-    while (temp > 0) {
-        suma = suma + (temp % 10);
-        temp = temp / 10;
+
+    while (mag > 0) {
+        suma = suma + (mag % 10);
+        mag = mag / 10;
     }
+
     *p = *p + suma;
 }
 
 void procesar_enigma(int *valor_referencia) {
-    f_alpha(valor_referencia);
-    f_beta(valor_referencia);
+    invertir(valor_referencia);
+    mitad_valor(valor_referencia);
     f_gamma(valor_referencia);
 }
 
